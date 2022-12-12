@@ -15,6 +15,8 @@ Package: u-boot-menu
 Depends:
  linux-base,
  ${misc:Depends},
+Recommends:
+ rsync,
 Suggests:
  flash-kernel,
 Architecture: all

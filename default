@@ -14,4 +14,4 @@
 #U_BOOT_FDT_DIR="/usr/lib/linux-image-"
 #U_BOOT_FDT_OVERLAYS=""
 #U_BOOT_FDT_OVERLAYS_DIR="/boot/dtbo/"
-
+#U_BOOT_SYNC_DTBS="false"
