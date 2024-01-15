@@ -1,5 +1,9 @@
 #!/bin/sh
 
+has_separate_boot() {
+    [ "$(stat --printf %d /)" != "$(stat --printf %d /boot)" ]
+}
+
 # Reading the default file
 if [ -e /etc/default/u-boot ]
 then
@@ -35,15 +39,15 @@ then
 fi
 
 # Find boot directory as seen in u-boot, and path prefix while in linux
-if [ "$(stat --printf %d /)" = "$(stat --printf %d /boot)" ]
+if has_separate_boot
 then
-	# / and /boot are on the same filesystem
-	_BOOT_DIRECTORY="/boot"
-	_BOOT_PATH=""
-else
 	# / and /boot are not on the same filesystem
 	_BOOT_DIRECTORY=""
 	_BOOT_PATH="/boot"
+else
+	# / and /boot are on the same filesystem
+	_BOOT_DIRECTORY="/boot"
+	_BOOT_PATH=""
 fi
 
 # Setting defaults if /etc/default/u-boot is missing
