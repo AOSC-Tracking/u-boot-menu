@@ -1,4 +1,3 @@
 read-config         usr/share/u-boot-menu
 u-boot-update       usr/sbin
-postinst/zz-u-boot-menu      etc/kernel/postinst.d
-postrm/zz-u-boot-menu      etc/kernel/postrm.d
+etc/kernel			etc/
