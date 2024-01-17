@@ -9,8 +9,7 @@ fi
 
 if [ "$1" = "configure" ]
 then
-	# if this is the first installation and if there is no old *.bak
-	# file, create an initial extlinux.conf
+	# Create an initial extlinux.conf if directory not already present
 	if [ -z "$2" ] && [ ! -e "/boot/extlinux" ]
 	then
 		/usr/sbin/u-boot-update
