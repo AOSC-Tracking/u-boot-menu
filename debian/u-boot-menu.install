@@ -1,4 +1,4 @@
 read-config         usr/share/u-boot-menu
 u-boot-update       usr/sbin
-etc/kernel			etc/
+etc/kernel          etc/
 usr                 /
