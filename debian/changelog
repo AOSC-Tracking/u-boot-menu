@@ -1,3 +1,27 @@
+u-boot-menu (4.2.3) unstable; urgency=medium
+
+  [ Vagrant Cascadian ]
+  * Default to U_BOOT_PROMPT set to "1".
+
+  [ Arnaud Ferraris ]
+  * u-boot-update: split config file reading to a separate script
+  * read-config: make /boot partition check a function
+  * Allow automatically syncing DTBs when /boot is on a separate partition
+    (Closes: #1025956)
+
+  [ Johannes Schauer Marin Rodrigues ]
+  * debian/u-boot-menu.postinst: create extlinux.conf on initial
+    installation. (Closes: #1053814)
+
+  [ Vagrant Cascadian ]
+  * Mirror etc directory for kernel post*.d files.
+  * Add hook to call u-boot-update for kernel-install. Thanks to Manuel
+    Traut. (Closes: #1027899)
+  * Simplify installation of /etc/default/u-boot
+  * debian/control: Update Standards-Version to 4.6.2.
+
+ -- Vagrant Cascadian <vagrant@debian.org>  Wed, 17 Jan 2024 12:44:46 -0800
+
 u-boot-menu (4.2.2) unstable; urgency=medium
 
   [ Diederik de Haas ]
