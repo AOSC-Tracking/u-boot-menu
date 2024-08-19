@@ -113,7 +113,7 @@ timeout ${U_BOOT_TIMEOUT}
 "
 
 # Find linux versions
-_KERNELS=$(linux-version list --paths | linux-version sort --reverse | sed -e 's,.*/boot/,,g')
+_KERNELS=$(ls /boot/vmlinu* | sed -e 's,.*/boot/,,g' | sort --reverse)
 
 for _KERNEL in ${_KERNELS}
 do
