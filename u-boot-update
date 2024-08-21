@@ -127,6 +127,9 @@ do
 	if [ -e "/boot/${U_BOOT_INITRD}-${_VERSION}" ]
 	then
 		_INITRD="initrd ${_BOOT_DIRECTORY}/${U_BOOT_INITRD}-${_VERSION}"
+	elif [ -e "/boot/${U_BOOT_INITRD}-${_VERSION}.img" ]
+	then
+		_INITRD="initrd ${_BOOT_DIRECTORY}/${U_BOOT_INITRD}-${_VERSION}.img"
 	elif [ -e "/boot/${U_BOOT_INITRD}" ]
 	then
 		_INITRD="initrd ${_BOOT_DIRECTORY}/${U_BOOT_INITRD}"
