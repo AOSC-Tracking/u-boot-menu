@@ -120,19 +120,27 @@ do
 	# Strip kernel prefix to derive version.
 	_VERSION=${_KERNEL#*-}
 	echo "P: Writing config for ${_KERNEL}..."
-
+	(($UBOOT_MOUNTED)) && install /boot/${_KERNEL} \
+		/boot/u-boot/${_KERNEL}
 	_NUMBER="${_NUMBER:-0}"
 	_ENTRY="${_ENTRY:-1}"
 
 	if [ -e "/boot/${U_BOOT_INITRD}-${_VERSION}" ]
 	then
 		_INITRD="initrd ${_BOOT_DIRECTORY}/${U_BOOT_INITRD}-${_VERSION}"
+		(($UBOOT_MOUNTED)) && install "/boot/${U_BOOT_INITRD}-${_VERSION}" \
+			/boot/u-boot/"${U_BOOT_INITRD}-${_VERSION}"
+
 	elif [ -e "/boot/${U_BOOT_INITRD}-${_VERSION}.img" ]
 	then
 		_INITRD="initrd ${_BOOT_DIRECTORY}/${U_BOOT_INITRD}-${_VERSION}.img"
+		(($UBOOT_MOUNTED)) && install "/boot/${U_BOOT_INITRD}-${_VERSION}.img" \
+			/boot/u-boot/"${U_BOOT_INITRD}-${_VERSION}.img"
 	elif [ -e "/boot/${U_BOOT_INITRD}" ]
 	then
 		_INITRD="initrd ${_BOOT_DIRECTORY}/${U_BOOT_INITRD}"
+		(($UBOOT_MOUNTED)) && install "/boot/${U_BOOT_INITRD}" \
+			/boot/u-boot/"${U_BOOT_INITRD}"
 	else
 		_INITRD=""
 	fi

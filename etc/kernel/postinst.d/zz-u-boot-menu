@@ -9,7 +9,7 @@ srcdir="/usr/lib/aosc-os-${ARCH}-boot/dtbs-kernel-${version}"
 destdir="${_BOOT_PATH}${_BOOT_DIRECTORY}${U_BOOT_FDT_DIR}${version}"
 
 # Sync DTBs if /boot is on a different partition than /
-if has_separate_boot && [ "${U_BOOT_SYNC_DTBS}" = "true" ] && command -v rsync >/dev/null 2>&1
+if u_boot_mounted && [ "${U_BOOT_SYNC_DTBS}" = "true" ] && command -v rsync >/dev/null 2>&1
 then
 	if [ -d "${srcdir}" ]
 	then

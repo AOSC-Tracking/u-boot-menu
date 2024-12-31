@@ -6,6 +6,10 @@ has_separate_boot() {
     [ "$(stat --printf %d /)" != "$(stat --printf %d /boot)" ]
 }
 
+u_boot_mounted() {
+	grep -q '[[:space:]]\+/boot/u-boot[[:space:]]\+' /proc/mounts
+}
+
 # Reading the default file
 if [ -e /etc/default/u-boot ]
 then
@@ -44,9 +48,29 @@ fi
 # Find boot directory as seen in u-boot, and path prefix while in linux
 if has_separate_boot
 then
-	# / and /boot are on different filesystems
+	echo "E: AOSC OS does not support /boot as the U-Boot filesystem."
+	echo "   Please mount the filesystem to /boot/u-boot, and try again."
+	echo "W: Remember to modify your /etc/fstab."
+	exit 1
+# In case of fstab is not generated yet.
+elif u_boot_mounted
+then
+	UBOOT_MOUNTED=1
 	_BOOT_DIRECTORY=""
-	_BOOT_PATH="/boot"
+	_U_BOOT_DIRECTORY="/boot/u-boot/extlinux"
+	_BOOT_PATH="/boot/u-boot/"
+	if [ "${U_BOOT_SYNC_DTBS}" = "true" ]
+	then
+		_FDT_DIR="/dtb-"
+	fi
+elif grep -q /boot/u-boot /etc/fstab
+then
+	echo "W: /boot/u-boot is not mounted. Mounting ..."
+	mount /boot/u-boot || { echo "E: Failed to mount /boot/u-boot. Exiting." ; exit 1 ;}
+	UBOOT_MOUNTED=1
+	_BOOT_DIRECTORY=""
+	_U_BOOT_DIRECTORY="/boot/u-boot/extlinux"
+	_BOOT_PATH="/boot/u-boot"
 	if [ "${U_BOOT_SYNC_DTBS}" = "true" ]
 	then
 		_FDT_DIR="/dtb-"
